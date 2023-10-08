@@ -69,5 +69,15 @@ const submit = () => {
                 </span>
             </div>
         </form>
+        <div class="mt-3">
+            <a :href="route('auth.social', { type: 'google' })" class="btn btn-light w-100 my-3 text-danger fw-bold"><i
+                    class="fab fa-google me-2 "></i> Continue via
+                Google</a>
+            <a :href="route('auth.social', { type: 'linkedin' })" class="btn btn-light w-100 text-info fw-bold"><i
+                    class="fab fa-linkedin-in fa me-2"></i> Continue
+                via
+                Linkedin
+            </a>
+        </div>
     </GuestLayout>
 </template>

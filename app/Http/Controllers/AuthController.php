@@ -12,6 +12,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -154,5 +155,37 @@ class AuthController extends Controller
         //TODO: SEND TOKEN TO USER
         $request->session()->put('create-account.token', $token);
         return to_route('register');
+    }
+
+    public function redirectToSocialLoginPage($type = 'google')
+    {
+        return Socialite::driver($type)->redirect();
+    }
+
+    public function handleCallback($type = 'google')
+    {
+        try {
+            $user = Socialite::driver($type)->user();
+        } catch (\Exception $e) {
+            return redirect('/login')->with('error', 'Unable to login with Google.');
+        }
+
+        $existingUser = User::where('email', $user->email)->first();
+
+        if ($existingUser) {
+            auth()->login($existingUser);
+        } else {
+            $newUser = new User();
+            $newUser->firstname = $user->user['given_name'];
+            $newUser->lastname = $user->user['family_name'];
+            $newUser->email = $user->email;
+            $newUser->slug = str()->slug($user->name);
+            $newUser->password = Hash::make($user->id);
+            $newUser->email_verified_at = now();
+            $newUser->save();
+            auth()->login($newUser);
+        }
+        // Redirect to the desired page after login
+        return redirect(RouteServiceProvider::HOME);
     }
 }

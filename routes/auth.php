@@ -44,6 +44,9 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
+
+    Route::get('/auth/{type}', [AuthController::class, 'redirectToSocialLoginPage'])->name('auth.social');
+    Route::get('/auth/{type}/callback', [AuthController::class, 'handleCallback']);
 });
 
 Route::middleware('auth')->group(function () {
