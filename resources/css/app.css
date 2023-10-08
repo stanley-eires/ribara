@@ -1,0 +1,28 @@
+.custom-vselect {
+    display: block;
+    width: 100%;
+    padding: 0.47rem 0.75rem;
+    line-height: .7;
+    color: var(--bs-body-color);
+    border: 1px solid var(--bs-input-border-color);
+    border-radius: 0.25rem;
+
+}
+
+.custom-vselect label {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    pointer-events: none;
+    transform-origin: 0 0;
+    opacity: .65;
+    transform: scale(.85);
+}
+
+.custom-vselect .vs__dropdown-toggle,
+.custom-vselect .vs__search,
+.custom-vselect .vs__selected-options {
+
+    border: 0;
+}
