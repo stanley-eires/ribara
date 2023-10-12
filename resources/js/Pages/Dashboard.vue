@@ -37,24 +37,32 @@ let nav = ref( [
     <AuthenticatedLayout>
         <div class="row">
             <div class="col-xxl-10">
-                <div
-                    class="card border-0 overflow-hidden shadow-lg info-box d-flex flex-column justify-content-center align-items-center">
-                    <div class="row unblurred">
+                <div class="card border-0 overflow-hidden shadow-lg info-box waves-effect w-100">
+                    <div class="row">
                         <div class="col-md-9">
-                            <div class="card-body ">
-                                <h3 class="d-none d-md-block  lh-md fw-bold text-center text-white text-md-start mb-3">Our
-                                    system is
-                                    set up to reach out to you with the right opportunities and connections.
-                                </h3>
-                                <p class="text-center text-md-start text-white">Set up your profile with our tools. Connect
-                                    with mentors, proteges, or peers at elite organizations; discover what your skills are
-                                    worth; discover any existing gaps; ask or share professional guidance and updates;
-                                    document and track your advancement</p>
+                            <div class="card-body w-100">
+                                <ul class="text-white list-unstyled fw-bold ">
+                                    <li class="d-flex align-items-start"><i
+                                            class="fas fa-thumbtack fa-rotate-270 text-warning me-3"></i>
+                                        Connect with mentors, proteges, or peers at elite organizations</li>
+                                    <li class="d-flex align-items-start"><i
+                                            class="fas fa-thumbtack fa-rotate-270 text-warning me-3"></i>
+                                        Discover what your skills are worth</li>
+                                    <li class="d-flex align-items-start"><i
+                                            class="fas fa-thumbtack fa-rotate-270 text-warning me-3"></i>
+                                        Discover any existing gaps</li>
+                                    <li class="d-flex align-items-start"><i
+                                            class="fas fa-thumbtack fa-rotate-270 text-warning me-3"></i>
+                                        Ask or offer professional guidance and updates</li>
+                                    <li class="d-flex align-items-start"><i
+                                            class="fas fa-thumbtack fa-rotate-270 text-warning me-3"></i>
+                                        Keep a track of your growth</li>
+                                </ul>
                                 <div class="text-center text-md-start">
                                     <Link :href="route('profile.index', { slug: $page.props.auth.user.slug })"
-                                        class="btn bg-white text-primary rounded-pill"><i class="far fa-user-pen"></i>
-                                    Profile
-                                    Settings</Link>
+                                        class="btn bg-light btn-sm text-primary rounded-pill"><i
+                                        class="far fa-user-pen"></i>
+                                    Update Profile</Link>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +139,7 @@ let nav = ref( [
 </template>
 <style scoped>
 .info-box {
-    min-height: 250px;
+    /* min-height: 220px; */
     background-image: url(/assets/images/bg.jpg);
     background-size: cover;
     background-position: center center;
@@ -139,18 +147,4 @@ let nav = ref( [
     backdrop-filter: blur(10px);
     background-blend-mode: overlay;
 }
-
-/* .blur {
-    height: 250px;
-    backdrop-filter: blur(10px);
-    background-color: #13121257
-}
-
-.unblurred {
-
-    overflow: hidden;
-    position: absolute;
-    top: 0px;
-    z-index: 2;
-} */
 </style>

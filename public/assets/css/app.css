@@ -23,11 +23,10 @@
     --bs-footer-color: #74788d;
     --bs-topnav-bg: #fff;
     --bs-menu-item-color: #7b8190;
-    --bs-menu-item-active-color: #5b73e8;
+    --bs-menu-item-active-color: var(--bs-primary);
     --bs-body-bg: #f6f6f6;
     --bs-body-color: #000;
     --bs-body-color-rgb: 73, 80, 87;
-    --bs-apex-grid-color: #f8f9fa;
     --bs-display-none: none;
     --bs-display-block: block;
     --bs-card-title-desc: #74788d;
@@ -38,8 +37,6 @@
     --bs-text-muted: #74788d;
     --bs-dropdown-link-hover-bg: #f8f9fa;
     --bs-input-focus-border: #adb9f4;
-    --bs-link-color: #5b73e8;
-    --bs-link-hover-color: #5b73e8;
     --bs-input-border-color: #ced4da;
     --bs-input-focus-border-color: #b1bbc4;
     --bs-input-bg: #fff;

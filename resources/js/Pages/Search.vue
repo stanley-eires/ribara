@@ -69,7 +69,7 @@ let loadMore = ( type ) => {
             </div>
             <div class="col-xxl-7 col-md-9">
                 <div class="accordion accordion-flush" id="accordionSearch" v-if="tab == 'top'">
-                    <div class="accordion-item bg-white" v-if="people.length">
+                    <div class="accordion-item bg-white">
                         <button class="accordion-button  fw-bold text-dark fs-4" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapsePeople">People
                         </button>
@@ -77,14 +77,26 @@ let loadMore = ( type ) => {
                             data-bs-parent="#accordionSearch">
                             <div class="accordion-body p-md-4 px-0">
                                 <div class="row">
-                                    <div class="col-md-4 col-6" v-for="i in people.slice(0, 6)" :key="i">
-                                        <user-card @onConnect="connect($event)" @onCancel="disconnect($event, true)"
-                                            @onDisconnect="disconnect($event)" :user="i" />
-                                    </div>
-                                    <div v-if="people.length > 6" class="col-12">
-                                        <Link class="btn btn-outline-primary w-100"
-                                            :href="route('search.results', { tab: 'people', q: keyword })">See
-                                        All</Link>
+                                    <template v-if="people.length">
+                                        <div class="col-md-4 col-6" v-for="i in people.slice(0, 6)" :key="i">
+                                            <user-card @onConnect="connect($event)" @onCancel="disconnect($event, true)"
+                                                @onDisconnect="disconnect($event)" :user="i" />
+                                        </div>
+                                        <div v-if="people.length > 6" class="col-12">
+                                            <Link class="btn btn-outline-primary w-100"
+                                                :href="route('search.results', { tab: 'people', q: keyword })">See
+                                            All</Link>
+                                        </div>
+                                    </template>
+                                    <div v-else>
+                                        <div class="p-5 mb-4 text-center">
+                                            <div class="container-fluid py-5">
+                                                <h1 class="fw-bold mb-3">Sorry "{{ keyword }}" is not on Ribara yet.</h1>
+                                                <p class="fs-4">Would you like to invite {{ keyword }}?</p>
+                                                <Link :href="route('users.invitation')" class="btn btn-primary btn-lg"
+                                                    type="button">Click to Invite</Link>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -105,17 +117,31 @@ let loadMore = ( type ) => {
 
                 </div>
                 <div class="row" v-else-if="tab == 'people'">
-                    <div class=" col-md-4 col-6" v-for="i in all_people" :key="i">
-                        <user-card @onConnect="connect($event)" @onCancel="disconnect($event, true)"
-                            @onDisconnect="disconnect($event)" :user="i" />
+                    <template v-if="all_people.length > 0">
+                        <div class=" col-md-4 col-6" v-for="i in all_people" :key="i">
+                            <user-card @onConnect="connect($event)" @onCancel="disconnect($event, true)"
+                                @onDisconnect="disconnect($event)" :user="i" />
+                        </div>
+                        <infinite-loading v-if="next_people_page_url" distance="50" direction="bottom"
+                            @infinite="loadMore('people')" />
+                    </template>
+                    <div v-else class="text-center ">
+                        <img src="/assets/images/404-error.png" alt="" style="width:300px;object-fit:cover">
+                        <h5>No results found</h5>
+                        <p>Try shortening or rephrasing your search.</p>
                     </div>
-                    <infinite-loading v-if="next_people_page_url" distance="50" direction="bottom"
-                        @infinite="loadMore('people')" />
                 </div>
                 <div v-else-if="tab == 'posts'">
-                    <post-item :post="i" v-for="i in all_posts" :key="i"></post-item>
-                    <infinite-loading v-if="next_post_page_url" distance="50" direction="bottom"
-                        @infinite="loadMore('posts')" />
+                    <template v-if="all_posts.length > 0">
+                        <post-item :post="i" v-for="i in all_posts" :key="i"></post-item>
+                        <infinite-loading v-if="next_post_page_url" distance="50" direction="bottom"
+                            @infinite="loadMore('posts')" />
+                    </template>
+                    <div v-else class="text-center ">
+                        <img src="/assets/images/404-error.png" alt="" style="width:300px;object-fit:cover">
+                        <h5>No results found</h5>
+                        <p>Try shortening or rephrasing your search.</p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -43,6 +43,10 @@ let menu = ref( [
                 </div>
             </div>
             <div class="col-md-9 main">
+                <div class="alert alert-primary" role="alert">
+                    Choose an action
+                </div>
+
                 <div class="row">
                     <template v-if="users.length">
                         <div class="col-xl-3  col-md-4 col-6" v-for=" i  in  users " :key="i">
@@ -81,7 +85,7 @@ let menu = ref( [
     }
 
     .main {
-        margin-top: 100px
+        margin-top: 120px
     }
 }
 </style>

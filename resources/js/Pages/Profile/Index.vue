@@ -279,7 +279,7 @@ let relationship = computed( () => {
                             <li class="list-group-item d-flex px-1 justify-content-between">
                                 <span>
                                     <i class="fad fa-handshake me-2 fs-4"></i>
-                                    <span>Available for hiring</span>
+                                    <span class="fw-bold">Available for hiring</span>
                                 </span>
                                 <div v-if="isOwner" class="form-check ms-2 form-switch">
                                     <input @change="handleSave" type="checkbox" v-model="form.usermeta.available_for_work"
@@ -287,28 +287,44 @@ let relationship = computed( () => {
                                 </div>
                                 <span v-else>{{ form.usermeta.available_for_work ? 'YES' : 'NO' }}</span>
                             </li>
-                            <li class="list-group-item d-flex px-1 justify-content-between">
-                                <span>
-                                    <i class="fad fa-baby  me-2 fs-4"></i>
-                                    <span>Willing to be mentored</span>
-                                </span>
-                                <div v-if="isOwner" class="form-check ms-2 form-switch ">
-                                    <input @change="handleSave" type="checkbox"
-                                        v-model="form.usermeta.available_for_mentoring" class="form-check-input"
-                                        id="available_for_work">
+                            <li class="list-group-item px-1">
+                                <div class="d-flex justify-content-between">
+                                    <span>
+                                        <i class="fad fa-baby  me-2 fs-4"></i>
+                                        <span class="fw-bold">Seeking for guidance on:</span>
+                                    </span>
+                                    <div v-if="isOwner" class="form-check ms-2 form-switch ">
+                                        <input @change="handleSave" type="checkbox"
+                                            v-model="form.usermeta.available_for_mentoring" class="form-check-input"
+                                            id="available_for_work">
+                                    </div>
+                                    <span v-else>{{ form.usermeta.available_for_mentoring ? 'YES' : 'NO' }}</span>
                                 </div>
-                                <span v-else>{{ form.usermeta.available_for_mentoring ? 'YES' : 'NO' }}</span>
+                                <div class="d-flex" v-if="user.interests?.protege?.length">
+                                    <strong class="me-1">Areas:</strong>
+                                    <span class="badge text-bg-primary rounded-0 badge-pill m-1"
+                                        v-for="i in user.interests.protege" :key="i">{{ i }}</span>
+                                </div>
                             </li>
-                            <li class="list-group-item d-flex px-1 justify-content-between">
-                                <span>
-                                    <i class="fad fa-person-breastfeeding me-2 fs-4"></i>
-                                    <span>Willing to mentor</span>
-                                </span>
-                                <div v-if="isOwner" class="form-check ms-2 form-switch ">
-                                    <input @change="handleSave" type="checkbox" v-model="form.usermeta.available_to_mentor"
-                                        class="form-check-input" id="available_to_mentor">
+                            <li class="list-group-item  px-1 ">
+                                <div class="d-flex justify-content-between">
+                                    <span>
+                                        <i class="fad fa-person-breastfeeding me-2 fs-4"></i>
+                                        <span class="fw-bold">Open to Guide you on:</span>
+                                    </span>
+                                    <div v-if="isOwner" class="form-check ms-2 form-switch ">
+                                        <input @change="handleSave" type="checkbox"
+                                            v-model="form.usermeta.available_to_mentor" class="form-check-input"
+                                            id="available_to_mentor">
+                                    </div>
+                                    <span v-else>{{ form.usermeta.available_to_mentor ? 'YES' : 'NO' }}</span>
+
                                 </div>
-                                <span v-else>{{ form.usermeta.available_to_mentor ? 'YES' : 'NO' }}</span>
+                                <div class="d-flex" v-if="user.interests?.mentoring?.length">
+                                    <strong class="me-1">Areas:</strong>
+                                    <span class="badge text-bg-primary rounded-0 badge-pill m-1"
+                                        v-for="i in user.interests.mentoring" :key="i">{{ i }}</span>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -658,7 +674,7 @@ let relationship = computed( () => {
                                         </div>
                                         <div class="form-floating mb-3">
                                             <textarea class="form-control" required v-model="form.usermeta.bio"
-                                                style="height:150px" maxlength="160"></textarea>
+                                                style="height:150px" maxlength="400"></textarea>
                                             <label>About Me</label>
                                         </div>
                                     </div>

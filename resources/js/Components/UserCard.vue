@@ -130,6 +130,8 @@ let requestDescription = () => {
                         :href="route('profile.index', { slug: user.slug, page: 'schedule' })" class="dropdown-item">
                     <i class="fal fa-calendar-plus me-1"></i> Schedule
                     Appointment</Link>
+                    <button class="dropdown-item"><i class="fal fa-comments me-1"></i>Request Informational
+                        Interview</button>
                     <button @click.prevent="disconnectUser(user.id, 'disconnect')" class="dropdown-item text-danger"><i
                             class="fal fa-user-times me-1"></i>
                         Disconnect</button>

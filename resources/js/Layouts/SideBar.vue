@@ -31,11 +31,13 @@ let copy = () => {
 
 let menus = [
     { title: "Home", icon: "fa-house fa-duotone", href: route( 'feeds' ), active: [ 'Dashboard', 'Feeds/Post', 'Feeds/PostEdit' ].includes( usePage().component ) },
+    { title: "Informational Interview", icon: "fad fa-comments", href: route( 'connections' ), active: false },
     { title: "Appointments", icon: "fad fa-calendar-star", href: route( 'appointment.index' ), active: [ 'Appointments/Index' ].includes( usePage().component ) },
     { title: "Messages", icon: "fad fa-comment-dots", href: route( 'messages.index' ), active: [ 'Messages/Conversation', 'Messages/Index' ].includes( usePage().component ) },
     { title: "People", icon: "fad fa-people-group", href: route( 'search.people' ), active: [ 'People' ].includes( usePage().component ) },
     { title: "Profile", icon: "fad fa-user-edit", href: route( 'profile.index', { slug: usePage().props.auth.user.slug } ), active: [ 'Profile/Index' ].includes( usePage().component ) },
     { title: "Connections", icon: "fad fa-users", href: route( 'connections' ), active: [ 'Connections' ].includes( usePage().component ) },
+    { title: "Opportunities", icon: "fad fa-briefcase", href: route( 'internship-opportunities' ), active: [ 'Jobs' ].includes( usePage().component ) },
     { title: "Invite Others", icon: "fad  fa-person-military-to-person", href: route( 'users.invitation' ), active: [ 'Invitation' ].includes( usePage().component ) }
     // { title: "Learning Box", icon: "fa-duotone fa-folder-closed", href: route( 'learning-box' ) },
     // { title: "Community", icon: "fad fa-users", href: route( 'community' ) },
@@ -64,7 +66,9 @@ let menus = [
             <div id="sidebar-menu">
                 <ul class="metismenu list-unstyled mt-3" id="side-menu">
                     <li v-for="menu in menus" :key="menu" :class="{ 'mm-active': menu.active }">
-                        <Link :href="menu.href"><i :class="menu.icon"></i> <span>{{ menu.title }}</span></Link>
+                        <Link :href="menu.href" class="d-flex"><i :class="menu.icon" class="me-1"></i>
+                        <span>{{ menu.title }}</span>
+                        </Link>
                     </li>
                     <li>
                         <Link href="#"><i class="fad fa-chart-pie"></i> <span>Skill Meter</span>

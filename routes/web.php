@@ -4,6 +4,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\FeedController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NotificationController;
@@ -126,6 +127,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('{tab}', [SearchController::class, 'searchResult'])->name('search.results')->middleware('profile.check');
     })->middleware('profile.check');
 
+    Route::prefix('internship-opportunities')->group(function () {
+        Route::get('', [JobController::class, 'index'])->name('internship-opportunities');
+        Route::get('generate', [JobController::class, 'generate']);
+    })->middleware('profile.check');
+
 
     Route::get('comment', [CommentController::class, 'show'])->name('comment.show');
     Route::post('comment', [CommentController::class, 'store'])->name('comment.store');
@@ -190,11 +196,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
     Route::delete('/messages/conversation', [MessageController::class, 'destroyConversation'])->name('messages.destroy.conversation');
 
-    Route::get('/learning-box', fn () => inertia('Construction', ['title' => 'Learning Box']))->name('learning-box');
-    Route::get('/community', fn () => inertia('Construction', ['title' => 'Community']))->name('community');
-    Route::get('/ranking', fn () => inertia('Construction', ['title' => 'Ranking']))->name('ranking');
-    Route::get('/analytics', fn () => inertia('Construction', ['title' => 'Analytics']))->name('analytics');
-    Route::get('/settings', fn () => inertia('Construction', ['title' => 'Settings']))->name('settings');
+    // Route::get('/learning-box', fn () => inertia('Construction', ['title' => 'Learning Box']))->name('learning-box');
+    // Route::get('/community', fn () => inertia('Construction', ['title' => 'Community']))->name('community');
+    // Route::get('/ranking', fn () => inertia('Construction', ['title' => 'Ranking']))->name('ranking');
+    // Route::get('/analytics', fn () => inertia('Construction', ['title' => 'Analytics']))->name('analytics');
+    // Route::get('/settings', fn () => inertia('Construction', ['title' => 'Settings']))->name('settings');
 
     Route::prefix('notifications')->group(function () {
         Route::get('/read', [NotificationController::class, 'readAll'])->name('notifications.read.all');
@@ -206,10 +212,10 @@ require __DIR__ . '/auth.php';
 
 Route::middleware(['auth', 'verified'])->group(
     function () {
-        Route::get('/{slug}/experiences', [UserExperienceController::class, 'index'])->name('profile.experience')->middleware('profile.check');
-        Route::get('/{slug}/educations', [UserEducationController::class, 'index'])->name('profile.education')->middleware('profile.check');
-        Route::get('/{slug}/certification', [UserCertificationController::class, 'index'])->name('profile.certification')->middleware('profile.check');
-        Route::get('{slug}/{page?}', [ProfileController::class, 'index'])->name('profile.index');
+        Route::get('@{slug}/experiences', [UserExperienceController::class, 'index'])->name('profile.experience')->middleware('profile.check');
+        Route::get('@{slug}/educations', [UserEducationController::class, 'index'])->name('profile.education')->middleware('profile.check');
+        Route::get('@{slug}/certification', [UserCertificationController::class, 'index'])->name('profile.certification')->middleware('profile.check');
+        Route::get('@{slug}/{page?}', [ProfileController::class, 'index'])->name('profile.index');
         // Route::get('{slug}/{stream}', [ProfileController::class, 'index'])->name('profile.index');
         // Route::get('/{slug}/connections/', [ProfileController::class, 'index'])->name('profile.connections')->middleware('profile.check');
     }
