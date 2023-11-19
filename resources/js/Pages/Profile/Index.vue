@@ -51,7 +51,7 @@ let handleSave = () => {
 let avatarform = useForm( { avatar: null } );
 const uploadAvatar = ( event ) => {
     avatarform.avatar = event.target.files[ 0 ];
-    avatarform.post( route( "profile.avatar" ), { preserveState: false, onFinish: () => modal.hide(), onSuccess: () => toast.success( "Avatar Changed" ) } )
+    avatarform.post( route( "profile.avatar" ), { preserveState: true, onFinish: () => modal.hide(), onSuccess: () => toast.success( "Avatar Changed" ) } )
 }
 const removeAvatar = () => useForm( { avatar: props.user.avatar } ).delete( route( 'profile.avatar.destroy' ), { preserveState: false, onSuccess: () => { modal.hide(); toast.success( "Avatar removed" ) } } );
 
@@ -219,6 +219,12 @@ let relationship = computed( () => {
                     </div>
                 </div>
             </div>
+
+
+        </div>
+        <div v-if="avatarform.errors.avatar" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            {{ avatarform.errors.avatar }}
         </div>
         <template v-if="page == 'connections'">
             <div class="row">
@@ -278,8 +284,8 @@ let relationship = computed( () => {
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex px-1 justify-content-between">
                                 <span>
-                                    <i class="fad fa-handshake me-2 fs-4"></i>
-                                    <span class="fw-bold">Available for hiring</span>
+                                    <i class="fat fa-handshake me-2 fs-4"></i>
+                                    <span class="">Available for hiring</span>
                                 </span>
                                 <div v-if="isOwner" class="form-check ms-2 form-switch">
                                     <input @change="handleSave" type="checkbox" v-model="form.usermeta.available_for_work"
@@ -290,8 +296,8 @@ let relationship = computed( () => {
                             <li class="list-group-item px-1">
                                 <div class="d-flex justify-content-between">
                                     <span>
-                                        <i class="fad fa-baby  me-2 fs-4"></i>
-                                        <span class="fw-bold">Seeking for guidance on:</span>
+                                        <i class="fat fa-baby  me-2 fs-4"></i>
+                                        <span class="">Seeking for guidance on:</span>
                                     </span>
                                     <div v-if="isOwner" class="form-check ms-2 form-switch ">
                                         <input @change="handleSave" type="checkbox"
@@ -301,7 +307,7 @@ let relationship = computed( () => {
                                     <span v-else>{{ form.usermeta.available_for_mentoring ? 'YES' : 'NO' }}</span>
                                 </div>
                                 <div class="d-flex" v-if="user.interests?.protege?.length">
-                                    <strong class="me-1">Areas:</strong>
+                                    <span class="me-1 fw-bold">Areas:</span>
                                     <span class="badge text-bg-primary rounded-0 badge-pill m-1"
                                         v-for="i in user.interests.protege" :key="i">{{ i }}</span>
                                 </div>
@@ -309,8 +315,8 @@ let relationship = computed( () => {
                             <li class="list-group-item  px-1 ">
                                 <div class="d-flex justify-content-between">
                                     <span>
-                                        <i class="fad fa-person-breastfeeding me-2 fs-4"></i>
-                                        <span class="fw-bold">Open to Guide you on:</span>
+                                        <i class="fat fa-person-breastfeeding me-2 fs-4"></i>
+                                        <span class="">Open to Guide you on:</span>
                                     </span>
                                     <div v-if="isOwner" class="form-check ms-2 form-switch ">
                                         <input @change="handleSave" type="checkbox"
@@ -321,7 +327,7 @@ let relationship = computed( () => {
 
                                 </div>
                                 <div class="d-flex" v-if="user.interests?.mentoring?.length">
-                                    <strong class="me-1">Areas:</strong>
+                                    <span class="me-1 fw-bold">Areas:</span>
                                     <span class="badge text-bg-primary rounded-0 badge-pill m-1"
                                         v-for="i in user.interests.mentoring" :key="i">{{ i }}</span>
                                 </div>
@@ -330,7 +336,7 @@ let relationship = computed( () => {
                     </div>
                     <div class="card card-body d-none d-md-block">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex"><i class="fad fa-briefcase me-4 fs-3"></i>
+                            <li class="list-group-item d-flex"><i class="fat fa-briefcase me-4 fs-3"></i>
                                 <p class="mb-0">
                                     <small class="text-muted d-block">Aspiring Role</small>
                                     <strong class="text-capitalize"
@@ -338,7 +344,7 @@ let relationship = computed( () => {
                                     <span v-else class="text-muted">(Not Stated)</span>
                                 </p>
                             </li>
-                            <li class="list-group-item d-flex"><i class="fad fa-location-dot me-4 fs-3"></i>
+                            <li class="list-group-item d-flex"><i class="fat fa-location-dot me-4 fs-3"></i>
                                 <p class="mb-0">
                                     <small class="text-muted d-block">Country of Residence</small>
                                     <strong class="text-capitalize"

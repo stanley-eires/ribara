@@ -67,7 +67,7 @@ let copy = () => {
 }
 </script>
 <template>
-    <div class="card shadow-sm p-3 mb-3 ">
+    <div class="card  p-3 mb-3 ">
         <div class="d-flex mb-1">
             <div class="me-3 flex-shrink-0">
                 <img loading="lazy" :src="post.user.avatar ?? '/assets/images/no-profilepics.png'"

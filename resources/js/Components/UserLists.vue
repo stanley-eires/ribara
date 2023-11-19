@@ -25,8 +25,8 @@ onMounted( async () => {
 </script>
 <template>
     <template v-if="isLoading">
-        <ul class="list-group list-group-flush" v-for="i in 7" :key="i">
-            <li class="list-group-item ">
+        <ul class="list-unstyled" v-for="i in 7" :key="i">
+            <li class="">
                 <div class="d-flex">
                     <div class="flex-shrink-0 me-2">
                         <div class="avatar placeholder placeholder-wave rounded-circle"></div>
@@ -45,9 +45,9 @@ onMounted( async () => {
             </li>
         </ul>
     </template>
-    <ul class="list-group list-group-flush">
+    <ul class="list-unstyled">
         <template v-if="users.length">
-            <li class="list-group-item" v-for="i in users" :key="i">
+            <li class="mb-2" v-for="i in users" :key="i">
                 <user-card :user="i" mode="list"></user-card>
             </li>
         </template>

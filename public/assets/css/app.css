@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;800&display=swap');
 
 :root {
     --bs-sidebar-bg: #fff;
@@ -22,15 +22,15 @@
     --bs-footer-bg: #f2f2f5;
     --bs-footer-color: #74788d;
     --bs-topnav-bg: #fff;
-    --bs-menu-item-color: #7b8190;
+    --bs-menu-item-color: #2c2c2d;
     --bs-menu-item-active-color: var(--bs-primary);
-    --bs-body-bg: #f6f6f6;
+    --bs-body-bg: #fff;
     --bs-body-color: #000;
     --bs-body-color-rgb: 73, 80, 87;
     --bs-display-none: none;
     --bs-display-block: block;
     --bs-card-title-desc: #74788d;
-    --bs-light: #f5f6f8;
+    --bs-light: #E5EAFC;
     --bs-light-rgb: 245, 246, 248;
     --bs-dark: #212529;
     --bs-dark-rgb: 33, 37, 41;
@@ -251,14 +251,6 @@ body[data-sidebar-size=sm] .navbar-header .vertical-menu-btn {
     content: "\eb8d"
 }
 
-body[data-layout=horizontal][data-topbar=dark] .logo-dark {
-    display: var(--bs-display-none)
-}
-
-body[data-layout=horizontal][data-topbar=dark] .logo-light {
-    display: var(--bs-display-block)
-}
-
 body[data-topbar=dark] #page-topbar {
     background-color: var(--bs-header-dark-bg)
 }
@@ -335,16 +327,7 @@ body[data-sidebar=dark] .navbar-brand-box .logo-light {
     }
 }
 
-body[data-layout=horizontal] .page-content {
-    margin-top: 70px;
-    padding: calc(80px + 1.25rem) .625rem 60px
-}
 
-@media (max-width:991.98px) {
-    body[data-layout=horizontal] .page-content {
-        margin-top: 0
-    }
-}
 
 @media (max-width:374.99px) {
     .navbar-brand-box {
@@ -517,7 +500,7 @@ body[data-layout=horizontal] .footer {
 
 .sidebar-menu-scroll {
     height: calc(100% - 70px);
-    margin-top: 70px
+    /* margin-top: 70px */
 }
 
 #sidebar-menu {
@@ -877,9 +860,7 @@ body[data-sidebar=dark] .menu-title {
     color: var(--bs-sidebar-dark-menu-item-icon-color)
 }
 
-body[data-layout=horizontal] .main-content {
-    margin-left: 0 !important
-}
+
 
 body[data-sidebar-size=small] .navbar-brand-box {
     width: 160px
@@ -2527,142 +2508,6 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
     background-color: #fff;
     color: #f46a6a;
     box-shadow: none
-}
-
-.irs {
-    font-family: Montserrat, sans-serif
-}
-
-.irs--round {
-    cursor: pointer
-}
-
-.irs--round .irs-bar,
-.irs--round .irs-from,
-.irs--round .irs-single,
-.irs--round .irs-to {
-    background: #5b73e8 !important;
-    font-size: 11px
-}
-
-.irs--round .irs-from:before,
-.irs--round .irs-single:before,
-.irs--round .irs-to:before {
-    display: none
-}
-
-.irs--round .irs-line {
-    background: var(--bs-gray-300);
-    border-color: var(--bs-gray-300)
-}
-
-.irs--round .irs-grid-text {
-    font-size: 11px;
-    color: #adb5bd
-}
-
-.irs--round .irs-max,
-.irs--round .irs-min {
-    color: #adb5bd;
-    background: var(--bs-gray-300);
-    font-size: 11px
-}
-
-.irs--round .irs-handle {
-    border: 1px solid #5b73e8;
-    width: 6px;
-    height: 16px;
-    top: 29px;
-    background-color: var(--bs-card-bg) !important;
-    cursor: pointer
-}
-
-.irs--round .irs-handle:active {
-    cursor: pointer
-}
-
-.swal2-container .swal2-title {
-    font-size: 24px;
-    font-weight: 500
-}
-
-.swal2-content {
-    font-size: 16px
-}
-
-.swal2-icon.swal2-question {
-    border-color: #50a5f1;
-    color: #50a5f1
-}
-
-.swal2-icon.swal2-success [class^=swal2-success-line] {
-    background-color: #34c38f
-}
-
-.swal2-icon.swal2-success .swal2-success-ring {
-    border-color: rgba(52, 195, 143, .3)
-}
-
-.swal2-icon.swal2-warning {
-    border-color: #f1b44c;
-    color: #f1b44c
-}
-
-.swal2-styled:focus {
-    box-shadow: none
-}
-
-.swal2-progress-steps .swal2-progress-step,
-.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step {
-    background: #5b73e8
-}
-
-.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step,
-.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line {
-    background: rgba(91, 115, 232, .3)
-}
-
-.swal2-progress-steps .swal2-progress-step-line {
-    background: #5b73e8
-}
-
-.swal2-loader {
-    border-color: #5b73e8 transparent
-}
-
-.br-wrapper {
-    display: inline-block
-}
-
-.br-theme-css-stars .br-widget a,
-.br-theme-fontawesome-stars .br-widget a {
-    font-weight: 900
-}
-
-.br-theme-css-stars .br-widget a.br-selected:after,
-.br-theme-fontawesome-stars .br-widget a.br-selected:after {
-    color: #f1b44c
-}
-
-.br-theme-fontawesome-stars .br-widget a {
-    font-weight: 900
-}
-
-.br-theme-fontawesome-stars-o .br-widget a,
-.br-theme-fontawesome-stars .br-widget a {
-    font-family: Font Awesome\ 5 Free
-}
-
-.br-theme-fontawesome-stars-o .br-widget a.br-active:after,
-.br-theme-fontawesome-stars-o .br-widget a.br-fractional:after,
-.br-theme-fontawesome-stars-o .br-widget a.br-selected:after {
-    font-weight: 900;
-    color: #34c38f
-}
-
-.br-theme-fontawesome-stars-o .br-widget a.br-fractional:after,
-.br-theme-fontawesome-stars-o .br-widget a:after {
-    content: "\f005"
 }
 
 .hidden {

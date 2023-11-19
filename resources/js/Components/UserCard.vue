@@ -37,7 +37,7 @@ let requestDescription = () => {
 }
 </script>
 <template>
-    <div v-if="mode == 'grid'" class="card p-3 shadow-lg text-center">
+    <div v-if="mode == 'grid'" class="card p-3  text-center">
         <div>
             <img loading="lazy"
                 :src="user.avatar && user.avatar != 'null' ? user.avatar : '/assets/images/no-profilepics.png'"
@@ -139,25 +139,27 @@ let requestDescription = () => {
             </div>
         </template>
     </div>
-    <div v-else class="d-flex">
-        <div class="flex-shrink-0 me-2">
+    <div v-else class="d-flex align-items-center">
+        <div class="flex-shrink-0 me-1">
             <img loading="lazy"
                 :src="user.avatar && user.avatar != 'null' ? user.avatar : '/assets/images/no-profilepics.png'"
                 class="avatar rounded-circle img-thumbnail">
         </div>
         <div class="row w-100">
             <div class="col-7">
-                <h6 class="mb-1 position-relative">
+                <p class="mb-0 position-relative text-truncate w-100 fw-bold font-size-12">
                     <Link class="text-dark stretched-link" :href="route('profile.index', { slug: user.slug })">
                     {{ user.fullname }}
                     </Link>
-                </h6>
-                <p v-if="user.headline" class="mb-0 font-size-12 text-capitalize text-muted">{{ user.headline }}</p>
+                </p>
+                <p v-if="user.headline" class="mb-0 font-size-11 text-capitalize text-muted text-truncate w-100">
+                    {{ user.headline }}
+                </p>
             </div>
             <div class="col-5 text-end">
                 <div v-if="relationship.status == 'not_connected'" class="w-100">
-                    <button type="button" data-bs-toggle="dropdown" class="btn w-100 btn-light p-2 btn-sm text-nowrap"><i
-                            class="fal fa-user-plus px-1"></i>
+                    <button type="button" data-bs-toggle="dropdown"
+                        class="btn w-100 btn-light  font-size-10 btn-sm text-nowrap">
                         Connect <i class="fal fa-chevron-down font-size-12 ms-1"></i></button>
                     <div class="dropdown-menu">
                         <Link :preserve-state="false" :preserve-scroll="true" as="button" method="POST"

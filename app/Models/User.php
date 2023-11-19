@@ -10,10 +10,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'firstname', 'lastname', 'phone', 'usermeta', 'phone_verified_at',
-        'email', 'password', 'slug', 'user_agents', 'is_admin', 'invited_by', 'avatar', 'headline', 'interests'
+        'email', 'password', 'slug', 'user_agents', 'is_admin', 'invited_by', 'avatar', 'headline', 'interests', 'status', 'login_at'
     ];
 
     protected $appends = ['fullname'];
@@ -45,6 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'phone_verified_at' => 'datetime',
+        'login_at' => 'datetime',
         'password' => 'hashed',
         "usermeta" => "array",
         'user_agents' => "array",
@@ -62,7 +64,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return Attribute::make(get: fn ($value, $attribute) => "{$attribute['firstname']} {$attribute['lastname']}");
     }
-
+    public function invited_by()
+    {
+        return $this->hasOne(User::class, 'invited_by');
+    }
+    public function sessions()
+    {
+        return $this->hasOne(Sessions::class);
+    }
     public function education()
     {
         return $this->hasMany(UserEducation::class);

@@ -3,7 +3,7 @@ import { logout } from "@/Scripts/helpers"
 import moment from "moment";
 import { onMounted, ref } from "vue";
 import SearchForm from '@/Components/SearchForm.vue';
-
+let props = defineProps( { menu: Object } );
 let btnclose = ref();
 onMounted( () => {
     document.querySelector( 'body' ).classList.remove( 'sidebar-enable' )
@@ -108,5 +108,49 @@ onMounted( () => {
                 </div>
             </div>
         </div>
+        <div class="container-fluid" v-if="menu">
+            <div class="topnav">
+
+                <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
+
+                    <div class="collapse navbar-collapse" id="topnav-menu-content">
+                        <ul class="navbar-nav ">
+                            <template v-for="item in menu" :key="item">
+                                <li v-if="item.submenu" class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-pages" role="button">
+                                        <i :class="item.icon" class="me-2"></i> {{ item.title }}
+                                        <div class="arrow-down"></div>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="topnav-pages">
+                                        <template v-for="sub_item in item.submenu" :key="sub_item">
+                                            <div v-if="sub_item.submenu" class="dropdown">
+                                                <a class="dropdown-item dropdown-toggle arrow-none" :href="sub_item.href"
+                                                    id="topnav-email" role="button">
+                                                    {{ sub_item.title }}
+                                                    <div class="arrow-down"></div>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="topnav-email">
+                                                    <a v-for="ss_sub_item in sub_item.submenu" :key="ss_sub_item"
+                                                        :href="ss_sub_item.href"
+                                                        class="dropdown-item">{{ ss_sub_item.title }}</a>
+                                                </div>
+                                            </div>
+                                            <a v-else :href="sub_item.href" class="dropdown-item">{{ sub_item.title }}</a>
+                                        </template>
+                                    </div>
+                                </li>
+                                <li v-else class="nav-item">
+                                    <Link class="nav-link" :href="item.href">
+                                    <i :class="item.icon" class="me-2"></i> {{ item.title }}
+                                    </Link>
+                                </li>
+                            </template>
+
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
     </header>
 </template>
+

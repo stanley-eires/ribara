@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Administrator\AdministratorController;
+use App\Http\Controllers\Administrator\ArticlesController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ConnectionController;
@@ -14,6 +16,8 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserCertificationController;
 use App\Http\Controllers\UserEducationController;
 use App\Http\Controllers\UserExperienceController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\Administrator\UsersController as AdminUsersController;
 use App\Models\UserCertification;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
@@ -49,7 +53,7 @@ use Inertia\Inertia;
 //                 $matric = trim($data[2]);
 //                 $email = trim($data[3]);
 //                 $fullname = "{$firstname} {$lastname}";
-//                 $password = "Password23?";
+//                 $password = "P@55W0rd";
 
 //                 $ldifEntry = "dn: uid={$matric},ou=people,dc=covenantuniversity,dc=edu,dc=ng\n";
 //                 $ldifEntry .= "cn: {$fullname}\n";
@@ -109,10 +113,24 @@ use Inertia\Inertia;
 
 
 Route::redirect("/", "/login");
+Route::get("/test", fn () => inertia('Admin/Dashboard'));
 
 Route::redirect("/dashboard", "/feeds");
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::prefix('administrator')->group(function () {
+        Route::get('', [AdministratorController::class, 'index'])->name('administrator.index')->middleware('role_or_permission:MANAGE_USERS');
+        Route::get('users', [AdminUsersController::class, 'index'])->name('administrator.users')->middleware('role_or_permission:MANAGE_USERS');
+        Route::put('users-action/{action?}', [AdminUsersController::class, 'bulkOperations'])->name('administrator.users.actions');
+        Route::get('users/create', [AdminUsersController::class, 'create'])->name('administrator.users.create')->middleware('role_or_permission:MANAGE_USERS');
+        Route::get('users/edit/{id}', [AdminUsersController::class, 'edit'])->name('administrator.users.edit')->middleware('role_or_permission:MANAGE_USERS');
+        Route::post('users/store', [AdminUsersController::class, 'store'])->name('administrator.users.store')->middleware('role_or_permission:MANAGE_USERS');
+
+        Route::get('articles', [ArticlesController::class, 'index'])->name('administrator.articles');
+        Route::get('articles/create', [ArticlesController::class, 'create'])->name('administrator.articles.create');
+    });
+
+
     Route::get('/feeds', [FeedController::class, 'index'])->name('feeds')->middleware('profile.check');
     Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
     Route::get('/post/{id}/edit', [PostController::class, 'edit'])->name('post.edit');

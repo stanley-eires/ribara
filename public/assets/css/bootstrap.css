@@ -28,7 +28,7 @@
     --bs-gray-700: #495057;
     --bs-gray-800: #343a40;
     --bs-gray-900: #212529;
-    --bs-primary: #1f1a6f;
+    --bs-primary: #1C156F;
     --bs-secondary: #74788d;
     --bs-success: #34c38f;
     --bs-info: #50a5f1;
@@ -4786,8 +4786,8 @@ fieldset:disabled .btn {
     --bs-card-spacer-x: 1.25rem;
     --bs-card-title-spacer-y: 0.5rem;
     --bs-card-border-width: 1px;
-    --bs-card-border-color: #f6f6f6;
-    --bs-card-border-radius: 20px;
+    --bs-card-border-color: #efefef;
+    --bs-card-border-radius: 10px;
     --bs-card-inner-border-radius: 0.25rem;
     --bs-card-cap-padding-y: 0.75rem;
     --bs-card-cap-padding-x: 1.25rem;

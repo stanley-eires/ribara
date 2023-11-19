@@ -26,10 +26,12 @@ return new class extends Migration
             $table->timestamp('phone_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_admin')->default(0);
+            $table->boolean('status')->default(1);
             $table->integer('invited_by')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->json('user_agents')->nullable();
+            $table->timestamp('login_at')->nullable();
         });
     }
 

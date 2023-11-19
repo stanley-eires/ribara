@@ -13,7 +13,6 @@ class FeedController extends Controller
 {
     public function index(Request $request, $isAjax = false)
     {
-
         $post = Post::join('users', 'users.id', '=', 'posts.user_id');
         $stream = $request->get('stream', 'network');
         if ($stream == 'author' && $request->get('author')) {

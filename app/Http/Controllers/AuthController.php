@@ -38,7 +38,7 @@ class AuthController extends Controller
                 'content' => 'There was a login to your account from a new device. Kindly review'
             ]));
             $user_agents[] = $request->server('HTTP_USER_AGENT');
-            User::where('id', $request->user()->id)->update(['user_agents' => array_unique($user_agents)]);
+            User::where('id', $request->user()->id)->update(['user_agents' => array_unique($user_agents), 'login_at' => date("Y-m-d H:i:s")]);
         }
         $request->session()->regenerate();
         return redirect()->intended(RouteServiceProvider::HOME);
@@ -182,6 +182,7 @@ class AuthController extends Controller
             $newUser->slug = str()->slug($user->name);
             $newUser->password = Hash::make($user->id);
             $newUser->email_verified_at = now();
+            $newUser->login_at = now();
             $newUser->save();
             auth()->login($newUser);
         }

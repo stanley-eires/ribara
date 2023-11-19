@@ -1,32 +1,22 @@
 <script setup>
 import { usePage } from "@inertiajs/vue3";
 import QRCodeVue3 from "qrcode-vue3";
-import { _btoa } from '@/Scripts/helpers';
-import { computed, ref, watch } from "vue";
+import { _btoa, generateInviteMessage, stripHtml } from '@/Scripts/helpers';
+import { ref, watch } from "vue";
 import { toast } from "vue3-toastify";
 
 let invitation_type = ref( 'peer' );
 let invitation_link = ref( null );
+let invitation_message = ref( null );
 watch( () => invitation_type, ( value ) => {
-    let url = `${ usePage().props.ziggy.url }/register?hook=${ _btoa( JSON.stringify( {
+    invitation_link.value = `${ usePage().props.ziggy.url }/register?hook=${ _btoa( {
         user_id: usePage().props.auth.user.id,
         type: value.value
-    } ) ) }`
-    invitation_link.value = url;
+    } ) }`
+    invitation_message.value = generateInviteMessage( value.value );
 }, { immediate: true, deep: true } )
 let copy = () => {
-    let message = null;
-    let usepage = usePage().props;
-    if ( invitation_type.value == 'mentor' ) {
-        message = `is inviting you to be ${ usepage.auth.user.usermeta.gender == 'Male' ? 'his' : 'her' } mentor on Ribara. ${ usepage.auth.user.usermeta.gender == 'Male' ? 'He' : 'She' } admires your ethics and would like to learn more from you.`
-    } else if ( invitation_type.value == 'protege' ) {
-        message = `wants to be your mentor on Ribara. On this platform, ${ usepage.auth.user.usermeta.gender == 'Male' ? 'he' : 'she' } is able to share ${ usepage.auth.user.usermeta.gender == 'Male' ? 'his' : 'her' } experiences that would help you better in your field.`
-    } else if ( invitation_type.value == 'peer' ) {
-        message = `wants to connect with you on Ribara to inspire each other as you grow in your career.`
-    }
-    message = `${ usepage.auth.user.fullname } ${ message } Accept the invite by clicking the link: ${ invitation_link.value }`
-
-    navigator.clipboard.writeText( message ).then( () => toast.success( "Invitation link copied" ) ).catch( ( err ) => toast.error( err ) )
+    navigator.clipboard.writeText( stripHtml( invitation_message.value ) ).then( () => toast.success( "Invitation link copied" ) ).catch( ( err ) => toast.error( err ) )
 }
 
 let menus = [

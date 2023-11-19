@@ -94,7 +94,7 @@ class ProfileController extends Controller
         $user = $request->user();
 
         $request->validate([
-            'avatar' => 'required|mimes:jpg,png,jpeg|max:1000',
+            'avatar' => 'required|mimes:jpg,png,jpeg|max:5000',
         ]);
         $image = $request->file('avatar');
         $imagename = $user->slug . '.' . $image->getClientOriginalExtension();

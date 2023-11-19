@@ -11,7 +11,7 @@ class Post extends Model
     use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     use HasFactory, HasUuids;
     protected $fillable = [
-        'user_id', 'content', 'postmeta', 'is_promoted', 'type', 'audience'
+        'user_id', 'content', 'postmeta', 'is_promoted', 'type', 'audience', 'status', 'admin_post'
     ];
 
     protected $with = ['user', 'likes'];

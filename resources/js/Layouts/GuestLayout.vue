@@ -1,56 +1,37 @@
 <script setup>
-
+import { register } from 'swiper/element/bundle';
+register();
 </script>
 
 <template>
     <div class="auth-bg">
-        <div class="container-fluid p-0 ">
-            <div class="row gx-0">
-                <div class="col-lg-5 col-xl-4 col-md-6 col-sm-12 sidepanel">
-                    <div class="blur"></div>
-                    <div class="p-5 unblurred w-100 text-black">
-                        <Link href="/"><img loading="lazy" class="mb-5" src="/logo.png" height="50"></Link>
+        <div class="container-fluid my-3">
+            <Link href="/"><img loading="lazy" class="mb-5" src="/logo.png" height="50"></Link>
+            <div class="row align-items-center">
+                <div class="col-lg-5 me-lg-auto col-sm-12 order-1 order-md-0">
+                    <div class="px-1">
+
                         <slot />
+                    </div>
+                </div>
+                <div class="col-lg-5 col-sm-12 order-0 order-md-1">
+                    <div class="card card-body bg-light mt-1" style="width: 100%; height: 90vh;">
+                        <img class="d-block rounded-4 mb-3" src="/assets/images/Rectangle.jpg" alt=""
+                            style="height:70vh;width:100%;object-fit: cover;">
+                        <swiper-container class="w-100 text-center" autoplay-delay="4000"
+                            autoplay-disable-on-interaction="true">
+                            <swiper-slide
+                                v-for="i in ['Connect with Mentors, Protégés and Peers at Elite Organisations', 'Track your Gaps and Improvements', 'Schedule Informational Interviews with Corporate Giants in your Field', 'Let Elite Organizations Discover You!']"
+                                :key="i" class="fs-2 fw-bold text-primary">{{ i }}</swiper-slide>
+                        </swiper-container>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
-<style>
-.auth-bg {
-    background-image: url(/assets/images/bg.jpg);
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center center;
-    min-height: 100%;
-}
 
-.blur {
-    height: 100%;
-    backdrop-filter: blur(5px);
-    filter: blur(5px);
-    background-color: #ffffff57
-}
-
-.sidepanel {
-    min-height: 100vh;
-    box-shadow: 0px 0px 1rem rgb(0, 0, 0);
-
-}
-
-.unblurred {
-    position: absolute;
-    top: 0px;
-}
-
-.form-control,
-.form-select,
-.form-control:focus {
-    background: transparent;
-    border: 2px solid #1c1b1bed;
-}
-
+<style >
 .form-floating>label {
     font-weight: 900;
 }

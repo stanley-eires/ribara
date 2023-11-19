@@ -44,7 +44,8 @@ class UserSeeder extends Seeder
                 ],
                 'email_verified_at' => now(),
                 'phone_verified_at' => now(),
-                'password' => Hash::make("password")
+                'password' => Hash::make("password"),
+                'login_at' => $faker->boolean(80) ? fake()->dateTimeBetween('- 3 days')->getTimestamp() : null
 
             ]);
             // ATTACH EDUCATION
@@ -79,6 +80,13 @@ class UserSeeder extends Seeder
                     'issued_date' => date("Y-m", $faker->dateTimeBetween()->getTimestamp()),
                     'url' => $faker->url(),
                 ]);
+            }
+        }
+        $users = User::select("id")->inRandomOrder()->get()->pluck("id");
+        foreach ($users as $key) {
+            $invited = $users->random();
+            if ($invited != $key && fake()->boolean(60)) {
+                User::where('id', $key)->update(['invited_by' => $invited]);
             }
         }
     }

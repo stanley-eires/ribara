@@ -56,7 +56,7 @@ onMounted( async () => {
         </template>
         <p v-else class="text-center"><i class="fas fa-calendar me-2"></i> No Scheduled Appointment</p>
     </template>
-    <div v-else class="card-body">
+    <div v-else>
         <div class="d-flex align-items-center mb-4">
             <a href="#" @click.prevent="item = null" class="me-5"><i class="fas fa-chevron-left me-2   "></i>Back</a>
             <p class="mb-0 fw-bold">Appointment Details</p>

@@ -8,15 +8,18 @@ use Illuminate\Support\Facades\Artisan;
 
 class JobController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data['jobs'] = Job::orderBy('title')->paginate(200);
-        $data['title'] = $data['jobs']['total'] . " Internship Opportunities you may like";
+        $data['jobs'] = Job::orderBy('title')->paginate(30);
+        if ($request->hasHeader('via-axios')) {
+            return $data['jobs'];
+        }
+        $data['title'] = "Internship Opportunities";
         return inertia('Jobs', $data);
     }
     public function generate()
     {
         Artisan::call("db:seed --class=JobSeeder --force");
-        return to_route("jobs");
+        return to_route("internship-opportunities");
     }
 }

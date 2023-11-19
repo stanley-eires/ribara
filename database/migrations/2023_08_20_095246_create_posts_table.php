@@ -18,7 +18,9 @@ return new class extends Migration
             $table->json('postmeta');
             $table->enum('type', ['post', 'event'])->default('post');
             $table->enum('audience', ['public', 'connections', 'only-me'])->default('public');
+            $table->enum('status', ['published', 'unpublished'])->default('published');
             $table->boolean('is_promoted')->default(0);
+            $table->boolean('admin_post')->default(0);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
